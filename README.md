@@ -1,4 +1,4 @@
-[grafana_screenshot](https://github.com/DJ1975-SE/plantmaster2000/blob/main/presentation/grafana-example.png)
+[grafana_screenshot](https://github.com/homegrow-csc/pm2k-bis/blob/main/presentation/grafana-screenshot2025.png?raw=true)
 
 # plantmaster2000
 [ESPHome](https://esphome.io/) / [MQTT](https://mosquitto.org/) / [Grafana](https://grafana.com/) / [MariaDB](https://mariadb.org/) / [Python](https://www.python.org/) based environment for documenting plants in various stages of growth. If you have [3](https://www.bundesgesundheitsministerium.de/en/themen/cannabis/faq-cannabis-act.html#c29864) of them, for example.
