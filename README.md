@@ -7,9 +7,11 @@ Idea is that this setup should be controllable / integrateable with Homeassistan
 
 This repository is the standalone approach. These scripts does not require a homeassistant installation and the sensor information is published to InfluxDB 2.
 
+These scripts are only a mean of demonstration, there is zero security design and they are not reviewed. There are prepared SQL statements as well as rm -r with usersupplied input. You do not want this exposed through internet or running on systems containing information or other things of value.
+
 ## Base Principle
 * Images are stored in a single straight table in MariaDB, as base64 encoded jpegs. temperature, light intensity, humidity and other environmental data can also be stored.
-* ESP32-CAM(s) running ESPHome code, sleeping and waking up for 2 minutes. While being awake, a control program contacts the camera and gets a picture using aioesphomeapi. Control program uploads to DB (after deciding to do so, based on light levels).
+* ESP32-CAM(s) running ESPHome / Homeassistant compatible code, sleeping and waking up for 2 minutes. While being awake, a control program contacts the camera and gets a picture using aioesphomeapi. Control program uploads to DB (after deciding to do so, based on light levels).
 * Raspberry pi zero W with camera(s) running standard Raspberry Pi OS, taking pictures and uploading them to the database directly, using a python script. The same light level decision as for the ESP32CAMs is used. The SD card is read only, by the standard Raspberry Pi OS tools.
 * ESP32 running Arduino code, collecting I2C + Dallas 1-Wire Sensor information and uploading it to InfluxDB 2. This can be temperature, humidity, brightness/light intensity, or other sensors.
 * ESP32 running Arduino code, listening to MQTT events, opening and closing a MOSFET switch, which start and stop 12 computer case fans.
@@ -43,10 +45,8 @@ This repository is the standalone approach. These scripts does not require a hom
 
 # Info
 * This code is probably only usable if it is inspected and modified to your specific use case.
-* Much information in the config file is only to tag the measurements in the database properly, for the code itself it does not matter what type of sensor it is or the name of it.
 * It can probably be made to work with influx 1 by someone knowing how to do that.
 * you might need to press CTRL-C several times to stop some of the python script, due to the async and kind of threaded code
-* you can change the name of the sensor from double, triplewhammy etc. it has no meaning or sense.
 * the only integration between the two python programs is through the sensor names in the config file. There is no pipe or tempfile or similar, the python scripts doesn't know about eachother.
 * if the MQTT server is restarted or become unreachable, you need to restart the whole thing. That is why the scripts have a limited run length and restart after x iterations.
 * if the cameras are located within a grow tent, you might need to move the AP a lot closer since the reflection material also seems to shield off radio waves.

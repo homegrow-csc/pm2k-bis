@@ -10,7 +10,7 @@ substitutions:
   runduration: 2min
   sleepduration: 30min
   my_payload: 'online2023'
-  swname: 'pm2kbis-cam'
+  swname: 'homegrow-csc.pm2kbis-cam'
   wifi_ssid: "SSID"
   wifi_pass: "PSK"
 
